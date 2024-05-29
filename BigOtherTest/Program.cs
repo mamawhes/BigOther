@@ -5,6 +5,7 @@ namespace Test
 {
     public class Player : Item
     {
+        public string Name="123";
         public character<int> HP;
         public character<int> HPMax;
         public Player(int hp,int hpMax)
@@ -33,9 +34,10 @@ namespace Test
         {
             Player player = new Player(10, 100);
             player.HP.RenderEffect += fun;
-            Console.WriteLine(player.GetCharacterVal<int>("HP"));
-            player.SetCharacterVal<int>("HP", 5);
-            Console.WriteLine(player.GetCharacterVal<int>("HP"));
+            
+            Console.WriteLine(player["HP"]);
+            player["HP"] = 5;
+            Console.WriteLine(player["HP"]);
             Console.WriteLine(player.ToString());
         }
 

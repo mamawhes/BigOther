@@ -9,6 +9,19 @@ namespace BigOther
     {
         public class Item
         {
+            public object this[string characterName]
+            {
+                get 
+                {
+                    var c = (Icharacter)this.GetType().GetField(characterName).GetValue(this);
+                    return c.GetUnion(); 
+                }
+                set
+                {
+                    var c = (Icharacter)this.GetType().GetField(characterName).GetValue(this);
+                    c.SetUnion(value);
+                }
+            }
             public void SetCharacterVal<T>(string characterName,T value)
             {
                 GetCharacterObject<T>(characterName).Set(value);
@@ -26,7 +39,11 @@ namespace BigOther
                 string res = "";
                 foreach (var info in this.GetType().GetFields())
                 {
-                    res += info.Name+","+info.GetValue(this)+"\n";
+                    if (!typeof(Icharacter).IsAssignableFrom(info.FieldType))
+                    {
+                        continue;
+                    }
+                    res += info.Name+","+ ((Icharacter)info.GetValue(this)).Type+","+ info.GetValue(this) + "\n";
                 }
                 return res;
             }
