@@ -6,6 +6,18 @@ namespace BigOther
    
     namespace Basic
     {
+        internal class CharacterFactory
+        {
+            public  character<T> CreateEmptyCharacter<T>(T value=default)
+            {
+                return new character<T>(value);
+            }
+            public Icharacter Create(Type type, object value)
+            {
+                var info = this.GetType().GetMethod("CreateEmptyCharacter").MakeGenericMethod(new Type[] { type });
+                return (Icharacter)info.Invoke(this, new object[] { value });
+            }
+        }
         /// <summary>
         /// 特性的接口，统一泛型对象
         /// </summary>
@@ -81,7 +93,10 @@ namespace BigOther
                     this.value = value;
                 }
             }
-
+            internal static character<T> CreateEmptyCharacter(T value)
+            {
+                return new character<T>(value);
+            }
             //public static implicit operator character<T>(T val)
             //{
             //    var res = new character<T>();
@@ -109,6 +124,8 @@ namespace BigOther
             {
                 _father = father;
             }
+          
+
             /// <inheritdoc/>
             public Type UnionType { get { return typeof(T); } }
             /// <inheritdoc/>

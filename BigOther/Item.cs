@@ -15,7 +15,7 @@ namespace BigOther
         /// </summary>
         public class Item : IBasic
         {
-            private Icharacter GetCharacter(string characterName)
+            public Icharacter GetCharacter(string characterName)
             {
                 var res = this.GetType().GetField(characterName);
                 if (res!=null&&!typeof(Icharacter).IsAssignableFrom(res.FieldType))
@@ -69,7 +69,8 @@ namespace BigOther
                 {
                     if (GetCharacter(characterName) == null)
                     {
-                        throw new Exception("cant find the character!");                
+                        AddNewCharacter(characterName,new CharacterFactory().Create(value.GetType(), value));
+                        return;
                     }
                     GetCharacter(characterName).UnionValue = value;
                 }
