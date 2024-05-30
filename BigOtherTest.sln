@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigOtherTest", "BigOtherTest\BigOtherTest.csproj", "{D13226BF-193D-4DA5-BA63-4A7D2949CCAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigOtherTest", "BigOtherTest\BigOtherTest.csproj", "{D13226BF-193D-4DA5-BA63-4A7D2949CCAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BigOther", "BigOther\BigOther.csproj", "{F1055AF6-2BD9-4292-BC0A-55948218EA40}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BigOther", "BigOther\BigOther.csproj", "{F1055AF6-2BD9-4292-BC0A-55948218EA40}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
