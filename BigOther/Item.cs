@@ -15,10 +15,10 @@ namespace BigOther
         /// </summary>
         public class Item : IBasic
         {
-            public Icharacter GetCharacter(string characterName)
+            public ICharacter GetCharacter(string characterName)
             {
                 var res = this.GetType().GetField(characterName);
-                if (res!=null&&!typeof(Icharacter).IsAssignableFrom(res.FieldType))
+                if (res!=null&&!typeof(ICharacter).IsAssignableFrom(res.FieldType))
                 {
                     throw new Exception("you defined same character's name!");
                 }
@@ -33,21 +33,21 @@ namespace BigOther
                         return null;
                     }
                 }
-                var ires = (Icharacter)res.GetValue(this);
+                var ires = (ICharacter)res.GetValue(this);
                 ires.SetFather(this);
                 return ires;
             }
-            private Dictionary<string, Icharacter> extraCharacter;
+            private Dictionary<string, ICharacter> extraCharacter;
             /// <summary>
             /// 添加新特性
             /// </summary>
             /// <param name="characterName"></param>
             /// <param name="character"></param>
-            public void AddNewCharacter(string characterName,Icharacter character)
+            public void AddNewCharacter(string characterName,ICharacter character)
             {
                 if(this.extraCharacter==null)
                 {
-                    this.extraCharacter = new Dictionary<string, Icharacter>();
+                    this.extraCharacter = new Dictionary<string, ICharacter>();
                 }
                 character.SetFather(this);
                 this.extraCharacter[characterName] = character;
@@ -91,13 +91,13 @@ namespace BigOther
             /// <typeparam name="T"></typeparam>
             /// <param name="characterName"></param>
             /// <returns></returns>
-            public character<T> GetCharacterObject<T>(string characterName)
+            public Character<T> GetCharacterObject<T>(string characterName)
             {
                 if(GetCharacter(characterName).UnionType != typeof(T))
                 {
                     Exception e = new Exception("错误类型！");
                 }
-                return (character<T>)GetCharacter(characterName);
+                return (Character<T>)GetCharacter(characterName);
             }
             /// <summary>
             /// 通过特性名获得特性值(需标注类型,安全）
@@ -112,18 +112,18 @@ namespace BigOther
             /// <summary>
             /// 获取所有特性的字典
             /// </summary>
-            public Dictionary<string,Icharacter> characters
+            public Dictionary<string,ICharacter> characters
             {
                 get
                 {
-                    var res =new Dictionary<string,Icharacter>();
+                    var res =new Dictionary<string,ICharacter>();
                     foreach (var info in this.GetType().GetFields())
                     {
-                        if (!typeof(Icharacter).IsAssignableFrom(info.FieldType))
+                        if (!typeof(ICharacter).IsAssignableFrom(info.FieldType))
                         {
                             continue;
                         }
-                        var ich = (Icharacter)info.GetValue(this);
+                        var ich = (ICharacter)info.GetValue(this);
                         ich.SetFather(this);
                         res.Add(info.Name, ich);
                     }

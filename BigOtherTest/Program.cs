@@ -5,8 +5,8 @@ namespace Test
 {
     public class Player : Item
     {
-        public character<int> HP;
-        public character<int> HPMax;
+        public Character<int> HP;
+        public Character<int> HPMax;
         public Player(int hp,int hpMax)
         {
             HP=new(hp);

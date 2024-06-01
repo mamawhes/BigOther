@@ -8,20 +8,20 @@ namespace BigOther
     {
         internal class CharacterFactory
         {
-            public  character<T> CreateEmptyCharacter<T>(T value=default)
+            public  Character<T> CreateEmptyCharacter<T>(T value=default)
             {
-                return new character<T>(value);
+                return new Character<T>(value);
             }
-            public Icharacter Create(Type type, object value)
+            public ICharacter Create(Type type, object value)
             {
                 var info = this.GetType().GetMethod("CreateEmptyCharacter").MakeGenericMethod(new Type[] { type });
-                return (Icharacter)info.Invoke(this, new object[] { value });
+                return (ICharacter)info.Invoke(this, new object[] { value });
             }
         }
         /// <summary>
         /// 特性的接口，统一泛型对象
         /// </summary>
-        public interface Icharacter
+        public interface ICharacter
         {
             /// <summary>
             /// 特性值属性
@@ -47,7 +47,7 @@ namespace BigOther
         /// 可以为修改值绑定事件
         /// </summary>
         /// <typeparam name="T">指定的任意数据类型</typeparam>
-        public class character<T>:Icharacter, IBasic
+        public class Character<T>:ICharacter, IBasic
         {
             private T value;
             internal IBasic _father=null;
@@ -76,7 +76,7 @@ namespace BigOther
             /// 构造函数
             /// </summary>
             /// <param name="value"></param>
-            public character(T value=default)
+            public Character(T value=default)
             {   
                 this.value = value;
             }
@@ -93,9 +93,9 @@ namespace BigOther
                     this.value = value;
                 }
             }
-            internal static character<T> CreateEmptyCharacter(T value)
+            internal static Character<T> CreateEmptyCharacter(T value)
             {
-                return new character<T>(value);
+                return new Character<T>(value);
             }
             //public static implicit operator character<T>(T val)
             //{
