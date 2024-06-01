@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BigOther
 {
-    namespace Basic1
+    namespace Basic
     {
         public class Pool
         {
